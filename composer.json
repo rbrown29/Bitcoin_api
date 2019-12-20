@@ -1,5 +1,5 @@
 {
-    "name": "richardbrown/Bitcoin_api",
+    "name": "richardbrown/bitcoin_api",
     "require": {
         "silex/silex": "~1.1"
     },
