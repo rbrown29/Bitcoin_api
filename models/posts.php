@@ -21,13 +21,13 @@ if(getenv('DATABASE_URL')){
 class Post {
   public $id;
   public $name;
-  public $image;
+  public $email;
   public $body;
 
-  public function __construct($id, $name, $image, $body){
+  public function __construct($id, $name, $email, $body){
     $this->id = $id;
     $this->name = $name;
-    $this->image = $image;
+    $this->email = $email;
     $this->body = $body;
   }
 }
@@ -43,7 +43,7 @@ class Posts {
       $new_post = new Post(
         intval($row_object->id),
         $row_object->name,
-        $row_object->image,
+        $row_object->email,
         $row_object->body
       );
       $posts[] = $new_post;
@@ -53,15 +53,15 @@ class Posts {
   }
 
   static function create($post){
-    $query = "INSERT INTO posts (name, image, body) VALUES ($1, $2, $3)";
-    $query_params = array($post->name, $post->image, $post->body);
+    $query = "INSERT INTO posts (name, email, body) VALUES ($1, $2, $3)";
+    $query_params = array($post->name, $post->email, $post->body);
     pg_query_params($query, $query_params);
     return self::all();
   }
 
   static function update($updated_post){
-      $query = "UPDATE posts SET name = $1, image = $2, body = $3 WHERE id = $4";
-      $query_params = array($updated_post->name, $updated_post->image, $updated_post->body, $updated_post->id);
+      $query = "UPDATE posts SET name = $1, email = $2, body = $3 WHERE id = $4";
+      $query_params = array($updated_post->name, $updated_post->email, $updated_post->body, $updated_post->id);
       $result = pg_query_params($query, $query_params);
 
       return self::all();
